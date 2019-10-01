@@ -1,11 +1,11 @@
 function createContactsList(arrayOfContactsObjects) {
     let result = {};
     arrayOfContactsObjects.sort(compareContacts).forEach(element => {
-        let firstChar = element.name[0];
-        if ((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z')) {
+        let firstChar = element.name[0].toLowerCase();
+        if (firstChar.match(/[a-z]/i).length > 0) {
             result[firstChar] ? result[firstChar].push(element) : result[firstChar] = [element]
         } else {
-            result[others] ? result[others].push(element) : result[others] = [element]
+            result['#'] ? result['#'].push(element) : result['#'] = [element]
         }
     });
     return result;

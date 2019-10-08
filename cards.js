@@ -1,4 +1,4 @@
-function createDeck(){
+function createDeck() {
     const colors = ['spades', 'hearts', 'diamonds', 'clubs'];
     const names = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
     let deck = [];
@@ -15,12 +15,12 @@ function createDeck(){
     return deck;
 }
 
-function shuffleDeck(deck){
+function shuffleDeck(deck) {
     deck.sort(() => Math.random() - Math.random());
 }
 
-function drawnCards(numberOfCardsToDrawn, deck){
-    return numberOfCardsToDrawn <= deck.length ? deck.slice(0, numberOfCardsToDrawn) : undefined
+function drawnCards(numberOfCardsToDrawn, deck) {
+    return numberOfCardsToDrawn <= deck.length ? deck.splice(0, numberOfCardsToDrawn) : undefined
 }
 
 function sortDeckByValue(deck) {
@@ -29,13 +29,24 @@ function sortDeckByValue(deck) {
 
 function sortDeckByColor(deck) {
     deck.sort((card1, card2) => {
-            if (card1.color < card2.color) {
-                return -1;
-            }
-            if (card1.color > card2.color) {
-                return 1;
-            }
-            return 0;
+        if (card1.color < card2.color) {
+            return -1;
         }
+        if (card1.color > card2.color) {
+            return 1;
+        }
+        return 0;
+    }
     );
+}
+
+function doubleSort(deck) {
+    const colors = ['spades', 'hearts', 'diamonds', 'clubs'];
+    let result = [];
+    colors.forEach(color => {
+        singleColorDeck = deck.filter(card => card.color === color);
+        sortDeckByValue(singleColorDeck);
+        result = result.concat(singleColorDeck);
+    });
+    return result;
 }
